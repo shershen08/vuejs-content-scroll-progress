@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+</head>
+<body>
+    <style>
+        .vue-sp-wrapper {
+            position: absolute;
+            top: 0px;
+            height: 4px;
+            background:transparent;
+            width: 100%;
+            z-index: 10000;
+        }
+        .vue-sp-indicator {
+            width: 30%;
+            background: #fc0;
+            height: 4px;
+            -webkit-transition: width .3;
+            -moz-transition: width .3;
+            transition: width .3;
+        }
+    </style>
+    <script>
+
+    var progressUIelem, scrollContainer;
+        var iterateChildren = function(childrenList){
+            var summ = 0;
+            for(var i =0; i<childrenList.length;i++){
+                var childElHeight = childrenList[i].getBoundingClientRect().height;
+                if(childElHeight >= 0) summ += childElHeight;
+            }
+            return summ;
+        }
+        var handleScroll = function(e){
+            var ratio = (scrollContainer.scrollTop/iterateChildren(scrollContainer.children))*100;
+            progressUIelem.style.width = ratio + '%';
+        }
+
+        document.addEventListener("DOMContentLoaded", function(event) { 
+            progressUIelem = document.querySelectorAll('.vue-sp-indicator')[0];
+            scrollContainer = document.querySelectorAll('.content.easy-vue-card')[0];
+            scrollContainer.addEventListener('scroll', handleScroll);
+        });
+    </script>
+    <div class="vue-sp-wrapper">
+        <div class="vue-sp-indicator"></div>
+    </div>
+<div id='app'></div>
+<script type="text/javascript" src="http://vue.tigerb.cn/dist/app.2def0c973f701c837d52.js"></script></body>
+</html>
