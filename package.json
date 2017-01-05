@@ -1,0 +1,24 @@
+{
+  "name": "vue-scroll-progress",
+  "version": "0.0.1",
+  "description": "vue.js plugin for scrolling progress bar display",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shershen08/vuejs-content-scroll-progress.git"
+  },
+  "keywords": [
+    "vue.js",
+    "progress-bar",
+    "inidcator"
+  ],
+  "author": "mkuznetcov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shershen08/vuejs-content-scroll-progress/issues"
+  },
+  "homepage": "https://github.com/shershen08/vuejs-content-scroll-progress#readme"
+}
