@@ -1,10 +1,10 @@
 ## Install
  
-Run ```npm install vue-scroll-progress```
+Run ```npm install vue-content-scroll-progress```
     
 ## Usage
 
-Add tag ```<vue-scroll-progress spy=".content-list"></vue-scroll-progress>```
+Add tag ```<content-scroll-progress spy=".content-list"><content-scroll-progress>```
     
 - **spy** is a required parameter; pass it a selector of the scrolled container element
 - **color**, optional; e.g. "#ffcc00" - color of the indicator
