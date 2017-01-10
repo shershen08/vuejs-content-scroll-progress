@@ -1,4 +1,4 @@
-import ScrollProgress from './ScrollProgress.vue';
+import ScrollProgress from './src/ScrollProgress.vue';
 
 export default ScrollProgress;
 export { ScrollProgress };

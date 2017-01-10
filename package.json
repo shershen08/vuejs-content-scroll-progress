@@ -1,6 +1,6 @@
 {
   "name": "vue-content-scroll-progress",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "vue.js plugin for scrolling progress bar display",
   "main": "index.js",
   "scripts": {

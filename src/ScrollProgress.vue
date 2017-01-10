@@ -24,7 +24,7 @@
             }
         },
         methods: {
-            checkChildren : function ( childrenList ) {
+            getChildrenHeight : function ( childrenList ) {
                 //first run
                 if(childrenList.length && this.childrenArrayLength === 0){
                     this.childrenHeight = this.iterateChildren(childrenList);
@@ -36,21 +36,28 @@
                 }
             },
             iterateChildren: function ( childrenList ) {
-                var summ = 0;
+                let summ = 0;
                 for ( var i = 0; i < childrenList.length; i++ ) {
                     var childElHeight = childrenList[ i ].getBoundingClientRect().height;
                     if ( childElHeight >= 0 ) summ += childElHeight;
                 }
                 return summ;
             },
-            handleScroll: function ( e ) {
-                let top = scrollContainer.scrollTop + scrollContainer.getBoundingClientRect().height;
-                let bottom = this.childrenHeight || this.checkChildren( scrollContainer.children );
-                let ratio = ( top / bottom ) * 100 ;
-                let result = (parseInt(ratio) >= 100 ? 100 : parseInt(ratio));
-
+            calculateScrollRatio : function(){
+                let viewed = scrollContainer.scrollTop + scrollContainer.getBoundingClientRect().height;
+                let total = this.childrenHeight || this.getChildrenHeight( scrollContainer.children );
+                let ratio = ( viewed / total ) * 100 ;
+                return (parseInt(ratio) >= 100 ? 100 : parseInt(ratio));
+            },
+            handleScroll: function () {
+                const result = this.calculateScrollRatio();
                 this.fullStyle = `width:${(result || minSize)}%;
                                   background-color:${this.colorStyle};`;
+            },
+            handleInitialProps : function(){
+                //following props colud have some validation
+                if(this.color) this.colorStyle = this.color; 
+                if(this.extraClass) this.classes += ' ' + this.extraClass;
             }
         },
         data() {
@@ -63,20 +70,14 @@
             };
         },
         mounted: function () {
-            if ( this.spy ) {
-                scrollContainer = document.querySelectorAll( this.spy )[ 0 ];
-            } else {
-                console.error('No scroll container provided');
-                throw new Error();
-            }
+            if ( !this.spy ) throw new Error('No scroll container provided');
+
+            scrollContainer = document.querySelectorAll( this.spy )[ 0 ];
             scrollContainer.addEventListener('scroll', this.handleScroll, false);
-            
-            //following props colud have some validation
-            if(this.color) this.colorStyle = this.color; 
-            if(this.extraClass) this.classes += ' ' + this.extraClass;
+            this.handleInitialProps();
         },
          beforeDestroy () {
-           scrollContainer.addEventListener('scroll', this.handleScroll);
+           scrollContainer.removeEventListener('scroll', this.handleScroll);
         }
     };
 </script>
